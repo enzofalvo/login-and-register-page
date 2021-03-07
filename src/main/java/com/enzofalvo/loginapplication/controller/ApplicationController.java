@@ -2,11 +2,14 @@ package com.enzofalvo.loginapplication.controller;
 
 import com.enzofalvo.loginapplication.model.User;
 import com.enzofalvo.loginapplication.service.UserService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ApplicationController {
@@ -20,7 +23,10 @@ public class ApplicationController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String postRegister(User user) {
+    public String postRegister(@Valid User user, BindingResult result, RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            return "redirect:/register";
+        }
         userService.save(user);
         return "success";
     }
