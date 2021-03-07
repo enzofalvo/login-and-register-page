@@ -1,35 +1,38 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Registra Aí</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!--CSS-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+        <style type="text/css">
+
+            .container {
+                height: 10em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-top: 200px;
+            }
+
+        </style>
     </head>
-    <body>
-        <form>  
-            <div class="col-md-6 offset-md-3" style="text-align:center">
-                <label for="exampleInputEmail1" class="form-label">Nome</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text"> </div>
-            </div>
-            <div class="col-md-6 offset-md-3" style="text-align:center">
-                <label for="exampleInputPassword1" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <div class="col-md-6 offset-md-3" style="text-align:center">
-                <label for="exampleInputPassword2" class="form-label">Repita Sua Senha</label>
-                <input type="password" class="form-control" id="exampleInputPassword2">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary col-md-6 offset-md-3" style="text-align:center">Cadastrar</button>
-        </form>
+    <body> 
+        <div class="container">
+            <form action="" method="POST">
+
+                <input type="text" placeholder="Nome"> <br><br>
+                
+                <input type="password" placeholder="Senha"> <br><br>
+
+                <input type="password" placeholder="Confirme Sua Senha"> <br><br>
+
+                <button type="submit" class="btn btn-secondary">Enviar</button>
+            </form>
+        </div>
     </body>
 </html>
