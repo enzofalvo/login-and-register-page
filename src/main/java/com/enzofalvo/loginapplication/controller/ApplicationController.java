@@ -5,6 +5,7 @@ import com.enzofalvo.loginapplication.service.UserService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,10 +25,13 @@ public class ApplicationController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String postRegister(@Valid User user, BindingResult result, RedirectAttributes attributes) {
-        if (result.hasErrors()) {
+
+        if (result.hasErrors() || !user.getPassword().equals(user.getPassword2())) {
             return "redirect:/register";
+        } 
+        else {
+            userService.save(user);
+            return "success";
         }
-        userService.save(user);
-        return "success";
     }
 }
