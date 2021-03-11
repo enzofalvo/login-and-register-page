@@ -27,7 +27,7 @@ public class ApplicationController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String postRegister(@Valid User user, BindingResult result, RedirectAttributes attributes) {
 
-        if (result.hasErrors() || !user.getPassword().equals(user.getPassword2()) || userService.findByName(user.getName()) == true) {
+        if (result.hasErrors() || !user.getPassword().equals(user.getPassword2()) || userService.findByName(user.getName()) == true || user.getPassword().isBlank()) {
             return "redirect:/register";
         } else {
             userService.save(user);
