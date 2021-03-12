@@ -2,6 +2,8 @@ package com.enzofalvo.loginapplication.controller;
 
 import com.enzofalvo.loginapplication.model.User;
 import com.enzofalvo.loginapplication.service.UserService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,14 +41,31 @@ public class ApplicationController {
     public ModelAndView getLogin() {
         return new ModelAndView("login");
     }
-    
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String Login(@Valid User user, BindingResult result, RedirectAttributes attributes, String name, String password) {
+    public String Login(@Valid User user, BindingResult result, RedirectAttributes attributes, String name, String password, HttpServletRequest session) {
         if (result.hasErrors() || !userService.findByNameAndPassword(name, password)) {
+            return "redirect:/login";
+        } else {
+            session.getSession();
+            session.getSession().setAttribute("name", name);
+            return "redirect:/mainPage";
+        }
+    }
+
+    @RequestMapping(value = "/redirect", method = RequestMethod.GET)
+    public String invalidateSession(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
+    }
+    
+    @RequestMapping(value = "/mainPage", method = RequestMethod.GET)
+    public String getMainPage(HttpServletRequest session) {
+        if (session.getSession().getAttribute("name") == null) {
             return "redirect:/login";
         }
         else {
-            return "mainPage";
+          return "mainPage";
         }
     }
 }
