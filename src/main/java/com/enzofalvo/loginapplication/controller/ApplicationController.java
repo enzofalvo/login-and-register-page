@@ -39,4 +39,14 @@ public class ApplicationController {
     public ModelAndView getLogin() {
         return new ModelAndView("login");
     }
+    
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String Login(@Valid User user, BindingResult result, RedirectAttributes attributes, String name, String password) {
+        if (result.hasErrors() || !userService.findByNameAndPassword(name, password)) {
+            return "redirect:/login";
+        }
+        else {
+            return "mainPage";
+        }
+    }
 }

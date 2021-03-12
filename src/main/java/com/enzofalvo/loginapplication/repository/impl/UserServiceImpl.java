@@ -24,4 +24,11 @@ public class UserServiceImpl implements UserService {
 
         return obj.isPresent();
     }
+
+    @Override
+    public boolean findByNameAndPassword(String name, String password) {
+        Optional<User> obj = userRepository.findByNameAndPassword(name, password);
+        
+        return obj.isPresent();
+    }
 }
