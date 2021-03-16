@@ -2,7 +2,10 @@ package com.enzofalvo.loginapplication.controller;
 
 import com.enzofalvo.loginapplication.model.User;
 import com.enzofalvo.loginapplication.service.UserService;
+import java.util.ResourceBundle.Control;
+import javax.persistence.Cache;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ApplicationController {
+    
+    private String attribute;
 
     @Autowired
     UserService userService;
@@ -47,8 +52,9 @@ public class ApplicationController {
         if (result.hasErrors() || !userService.findByNameAndPassword(name, password)) {
             return "redirect:/login";
         } else {
-            session.getSession();
-            session.getSession().setAttribute("name", name);
+            session.setAttribute("name", user.getName());
+            attribute = (String) session.getAttribute("name");
+            System.out.println(attribute);
             return "redirect:/mainPage";
         }
     }
@@ -56,12 +62,15 @@ public class ApplicationController {
     @RequestMapping(value = "/redirect", method = RequestMethod.GET)
     public String invalidateSession(HttpSession session) {
         session.invalidate();
+        attribute = null;
         return "redirect:/login";
     }
     
     @RequestMapping(value = "/mainPage", method = RequestMethod.GET)
-    public String getMainPage(HttpServletRequest session) {
-        if (session.getSession().getAttribute("name") == null) {
+    public String getMainPage(HttpServletRequest session, HttpServletResponse response) {
+        
+        System.out.println(attribute);
+        if (attribute == null) {
             return "redirect:/login";
         }
         else {
