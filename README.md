@@ -8,7 +8,7 @@ Esta aplicação foi desenvolvida com o framework Spring. O usuário poderá faz
    * Log-in
    * Encerrar Sessão
 <!--te-->
-
+ (Utilize Nome e Senha Fictícios Na Aplicação)
 
 ## 🛠 Tecnologias
 
