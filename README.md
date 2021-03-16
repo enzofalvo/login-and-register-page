@@ -1,6 +1,6 @@
 #  Aplicação Web de Login e Cadastro.
 ## ![Screenshot](https://github.com/enzofalvo/login-and-register-page/blob/master/readme/screenshots/register-page.png)
-## ![Screenshot](https://github.com/enzofalvo/login-and-register-page/blob/master/readme/screenshots/login-page.png)
+
 
 ## 📖 Sobre
 Esta aplicação foi desenvolvida com o framework Spring. O usuário poderá fazer algumas ações, como:
