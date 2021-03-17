@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ApplicationController {
-    
+
     private String attribute;
 
     @Autowired
@@ -50,7 +50,6 @@ public class ApplicationController {
         } else {
             session.setAttribute("name", user.getName());
             attribute = (String) session.getAttribute("name");
-            System.out.println(attribute);
             return "redirect:/mainPage";
         }
     }
@@ -61,16 +60,19 @@ public class ApplicationController {
         attribute = null;
         return "redirect:/login";
     }
-    
+
     @RequestMapping(value = "/mainPage", method = RequestMethod.GET)
-    public String getMainPage(HttpServletRequest session, HttpServletResponse response) {
-        
-        System.out.println(attribute);
+    public ModelAndView getMainPage(HttpServletRequest request, User user) {
+
         if (attribute == null) {
-            return "redirect:/login";
-        }
+            return new ModelAndView("redirect:/login");
+        } 
         else {
-          return "mainPage";
+            ModelAndView mv = new ModelAndView("mainPage");
+            
+            mv.addObject("user", attribute);
+            System.out.println(user.getName());
+            return mv;
         }
     }
 }
